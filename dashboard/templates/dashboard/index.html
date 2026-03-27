@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4">Learning Dashboard</h2>
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5>User Level</h5>
+                <p class="display-6">{{ profile.get_level_display }}</p>
+                <p>Average Score: {{ profile.total_score }}</p>
+                <p>Quizzes Taken: {{ profile.quizzes_taken }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <h5>Enrolled Courses</h5>
+                <ul class="list-group">
+                    {% for enrollment in enrollments %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{{ enrollment.course.title }}</span>
+                        <span>{{ enrollment.progress }}%</span>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item">No enrolled courses yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5>Quiz History</h5>
+                <ul class="list-group">
+                    {% for result in quiz_history %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{{ result.quiz.title }}</span>
+                        <span class="badge bg-primary">{{ result.score }}%</span>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item">No quiz attempts yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5>Recommended Courses</h5>
+                <ul class="list-group">
+                    {% for course in recommendations %}
+                    <li class="list-group-item">
+                        <a href="{% url 'courses:detail' course.id %}">{{ course.title }}</a>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item">No recommendations right now.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

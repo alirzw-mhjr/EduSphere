@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h3>Quiz Result</h3>
+        <p><strong>Quiz:</strong> {{ result.quiz.title }}</p>
+        <p><strong>Your Score:</strong> {{ result.score }}%</p>
+        <p><strong>Feedback:</strong> {{ feedback }}</p>
+        <a class="btn btn-primary" href="{% url 'dashboard:index' %}">Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

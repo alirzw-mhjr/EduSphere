@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h3>{{ lesson.title }}</h3>
+        <p>{{ lesson.content|linebreaks }}</p>
+        {% if lesson.video_url %}
+        <div class="ratio ratio-16x9 mb-3">
+            <iframe src="{{ lesson.video_url }}" allowfullscreen></iframe>
+        </div>
+        {% endif %}
+        {% if quiz %}
+        <a href="{% url 'quizzes:take' quiz.id %}" class="btn btn-primary">Take Quiz</a>
+        {% endif %}
+        <a href="{% url 'classroom:virtual' lesson.id %}" class="btn btn-outline-secondary">Virtual Classroom</a>
+    </div>
+</div>
+{% endblock %}

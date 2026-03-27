@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h3>My Profile</h3>
+        <p><strong>Username:</strong> {{ request.user.username }}</p>
+        <p><strong>Email:</strong> {{ request.user.email }}</p>
+        <p><strong>Current Level:</strong> <span class="badge bg-success">{{ profile.get_level_display }}</span></p>
+        <p><strong>Average Score:</strong> {{ profile.total_score }}</p>
+        <p><strong>Quizzes Taken:</strong> {{ profile.quizzes_taken }}</p>
+    </div>
+</div>
+{% endblock %}
